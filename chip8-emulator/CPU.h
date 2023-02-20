@@ -9,6 +9,7 @@ class CPU
 public:
 	CPU(std::string romFilename);
 	~CPU();
+	void cycle();
 	uint32_t* getVideoMemory();
 private:
 	uint8_t registers[16]{};

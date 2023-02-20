@@ -14,6 +14,9 @@ CPU::~CPU()
 	delete[] videoMemory;
 }
 
+void CPU::cycle()
+{}
+
 uint32_t* CPU::getVideoMemory()
 {
 	return videoMemory;

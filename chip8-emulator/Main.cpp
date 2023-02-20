@@ -21,6 +21,7 @@ int main(int argc, char* argv[])
 				break;
 			}
 		}
+		cpu.cycle();
 		SDL_RenderClear(renderer);
 		SDL_UpdateTexture(texture, NULL, cpu.getVideoMemory(), 4 * 64);
 		SDL_RenderCopy(renderer, texture, NULL, NULL);
