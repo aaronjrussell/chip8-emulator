@@ -141,6 +141,9 @@ void CPU::decodeOpcode(uint16_t opcode)
 	case 0xB:
 		OP_Bnnn(opcode);
 		break;
+	case 0xC:
+		OP_Cxkk(opcode);
+		break;
 	}
 }
 
@@ -297,4 +300,11 @@ void CPU::OP_Bnnn(uint16_t opcode)
 	uint16_t address = opcode & 0x0FFF;
 	address += registers[0];
 	programCounter = address;
+}
+
+void CPU::OP_Cxkk(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	uint8_t value = opcode & 0x00FF;
+	registers[vx] = randInt(randEngine) & value;
 }
