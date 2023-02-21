@@ -100,6 +100,17 @@ void CPU::decodeOpcode(uint16_t opcode)
 	case 0x7:
 		OP_7xkk(opcode);
 		break;
+	case 0x8:
+		switch (part4)
+		{
+		case 0x0:
+			OP_8xy0(opcode);
+			break;
+		case 0x1:
+			OP_8xy1(opcode);
+			break;
+		}
+		break;
 	}
 }
 
@@ -166,4 +177,18 @@ void CPU::OP_7xkk(uint16_t opcode)
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	uint8_t value = opcode & 0x00FF;
 	registers[vx] += value;
+}
+
+void CPU::OP_8xy0(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	uint8_t vy = (opcode & 0x00F0) >> 4;
+	registers[vx] = registers[vy];
+}
+
+void CPU::OP_8xy1(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	uint8_t vy = (opcode & 0x00F0) >> 4;
+	registers[vx] |= registers[vy];
 }
