@@ -147,6 +147,14 @@ void CPU::decodeOpcode(uint16_t opcode)
 	case 0xD:
 		OP_Dxyn(opcode);
 		break;
+	case 0xE:
+		switch (part4)
+		{
+		case 0xE:
+			OP_Ex9E(opcode);
+			break;
+		}
+		break;
 	}
 }
 
@@ -337,4 +345,11 @@ void CPU::OP_Dxyn(uint16_t opcode)
 			}
 		}
 	}
+}
+
+void CPU::OP_Ex9E(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	uint8_t key = registers[vx];
+	if (input[key]) programCounter += 2;
 }
