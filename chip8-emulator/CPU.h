@@ -1,6 +1,8 @@
 #pragma once
 
+#include "Exceptions.h"
 #include <cstdint>
+#include <exception>
 #include <fstream>
 #include <string>
 
@@ -12,6 +14,8 @@ public:
 	void cycle();
 	uint32_t* getVideoMemory();
 private:
+	const uint16_t romStartAddress = 0x200;
+	const uint16_t maxRomSize = 3584;
 	uint8_t registers[16]{};
 	uint8_t* memory;
 	uint32_t* videoMemory;

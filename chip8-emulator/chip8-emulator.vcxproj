@@ -151,10 +151,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPU.cpp" />
+    <ClCompile Include="Exceptions.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPU.h" />
+    <ClInclude Include="Exceptions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
