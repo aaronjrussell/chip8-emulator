@@ -166,6 +166,7 @@ void CPU::decodeOpcode(uint16_t opcode)
 		if (part3 == 0x2 && part4 == 0x9) OP_Fx29(opcode);
 		if (part3 == 0x3 && part4 == 0x3) OP_Fx33(opcode);
 		if (part3 == 0x5 && part4 == 0x5) OP_Fx55(opcode);
+		if (part3 == 0x6 && part4 == 0x5) OP_Fx65(opcode);
 		break;
 	}
 }
@@ -434,8 +435,17 @@ void CPU::OP_Fx33(uint16_t opcode)
 void CPU::OP_Fx55(uint16_t opcode)
 {
 	uint8_t vx = (opcode & 0x0F00) >> 8;
-	for (int reg = 0; reg < vx; ++reg)
+	for (int reg = 0; reg <= vx; ++reg)
 	{
 		memory[indexRegister + reg] = registers[reg];
+	}
+}
+
+void CPU::OP_Fx65(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	for (int reg = 0; reg <= vx; ++reg)
+	{
+		registers[reg] = memory[indexRegister + reg];
 	}
 }

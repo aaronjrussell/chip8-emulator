@@ -88,4 +88,5 @@ private:
 	void OP_Fx29(uint16_t opcode);
 	void OP_Fx33(uint16_t opcode);
 	void OP_Fx55(uint16_t opcode);
+	void OP_Fx65(uint16_t opcode)
 };
