@@ -138,6 +138,9 @@ void CPU::decodeOpcode(uint16_t opcode)
 	case 0xA:
 		OP_Annn(opcode);
 		break;
+	case 0xB:
+		OP_Bnnn(opcode);
+		break;
 	}
 }
 
@@ -287,4 +290,11 @@ void CPU::OP_Annn(uint16_t opcode)
 {
 	uint16_t address = opcode & 0x0FFF;
 	indexRegister = address;
+}
+
+void CPU::OP_Bnnn(uint16_t opcode)
+{
+	uint16_t address = opcode & 0x0FFF;
+	address += registers[0];
+	programCounter = address;
 }

@@ -76,4 +76,5 @@ private:
 	void OP_8xyE(uint16_t opcode);
 	void OP_9xy0(uint16_t opcode);
 	void OP_Annn(uint16_t opcode);
+	void OP_Bnnn(uint16_t opcode);
 };
