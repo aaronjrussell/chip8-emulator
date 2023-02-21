@@ -74,6 +74,9 @@ void CPU::decodeOpcode(uint16_t opcode)
 		case 0x0:
 			OP_00E0();
 			break;
+		case 0xE:
+			OP_00EE();
+			break;
 		}
 		break;
 	}
@@ -87,4 +90,10 @@ uint32_t* CPU::getVideoMemory()
 void CPU::OP_00E0()
 {
 	std::fill(memory, memory + memorySize, 0);
+}
+
+void CPU::OP_00EE()
+{
+	--stackPointer;
+	programCounter = stack[stackPointer];
 }

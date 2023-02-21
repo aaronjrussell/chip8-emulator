@@ -57,4 +57,5 @@ private:
 	void loadFontset();
 	void decodeOpcode(uint16_t opcode);
 	void OP_00E0();
+	void OP_00EE();
 };
