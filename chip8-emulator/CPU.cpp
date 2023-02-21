@@ -144,6 +144,9 @@ void CPU::decodeOpcode(uint16_t opcode)
 	case 0xC:
 		OP_Cxkk(opcode);
 		break;
+	case 0xD:
+		OP_Dxyn(opcode);
+		break;
 	}
 }
 
@@ -307,4 +310,31 @@ void CPU::OP_Cxkk(uint16_t opcode)
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	uint8_t value = opcode & 0x00FF;
 	registers[vx] = randInt(randEngine) & value;
+}
+
+void CPU::OP_Dxyn(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	uint8_t vy = (opcode & 0x00F0) >> 4;
+	uint8_t height = opcode & 0x000F;
+	uint8_t posX = registers[vx] % 64;
+	uint8_t posY = registers[vy] % 32;
+	registers[0xF] = 0;
+	for (int row = 0; row < height; ++row)
+	{
+		uint8_t spriteRow = memory[indexRegister + row];
+		for (int column = 0; column < 8; ++column)
+		{
+			uint8_t spritePixel = spriteRow & (0x80 >> column);
+			uint32_t* screenPixel = &videoMemory[(posY + row) * 64 + (posX + column)];
+			if (spritePixel)
+			{
+				if (*screenPixel == 0xFFFFFFFF)
+				{
+					registers[0xF] = 1;
+				}
+				*screenPixel ^= 0xFFFFFFFF;
+			}
+		}
+	}
 }
