@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Exceptions.h"
+#include <chrono>
 #include <cstdint>
 #include <exception>
 #include <fstream>
+#include <random>
 #include <string>
 
 class CPU
@@ -46,6 +48,8 @@ private:
 	uint8_t stackPointer{ 0 };
 	uint8_t delayTimer{ 0 };
 	uint8_t soundTimer{ 0 };
+	std::default_random_engine randEngine;
+	std::uniform_int_distribution<uint16_t> randInt;
 	bool input[16]{};
 	void loadROM(std::string filename);
 	void loadFontset();

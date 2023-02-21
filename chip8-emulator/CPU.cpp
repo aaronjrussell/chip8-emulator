@@ -2,7 +2,9 @@
 
 CPU::CPU(std::string romFilename) :
 	memory{ new uint8_t[4096]{} },
-	videoMemory{ new uint32_t[64 * 32]{} }
+	videoMemory{ new uint32_t[64 * 32]{} },
+	randEngine{ std::chrono::system_clock::now().time_since_epoch().count() },
+	randInt{std::uniform_int_distribution<uint16_t>(0, 255)}
 {
 	loadROM(romFilename);
 	loadFontset();
