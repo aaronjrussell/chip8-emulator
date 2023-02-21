@@ -124,6 +124,9 @@ void CPU::decodeOpcode(uint16_t opcode)
 		case 0x6:
 			OP_8xy6(opcode);
 			break;
+		case 0x7:
+			OP_8xy7(opcode);
+			break;
 		}
 		break;
 	}
@@ -236,10 +239,9 @@ void CPU::OP_8xy5(uint16_t opcode)
 {
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	uint8_t vy = (opcode & 0x00F0) >> 4;
-	uint16_t difference = registers[vx] - registers[vy];
 	if (registers[vx] > registers[vy]) registers[0xF] = 1;
 	else registers[0xF] = 0;
-	registers[vx] = difference;
+	registers[vx] = registers[vx] - registers[vy];
 }
 
 void CPU::OP_8xy6(uint16_t opcode)
@@ -247,4 +249,13 @@ void CPU::OP_8xy6(uint16_t opcode)
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	registers[0xF] = registers[vx] & 0x0001;
 	registers[vx] >>= 1;
+}
+
+void CPU::OP_8xy7(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	uint8_t vy = (opcode & 0x00F0) >> 4;
+	if (registers[vx] < registers[vy]) registers[0xF] = 1;
+	else registers[0xF] = 0;
+	registers[vx] = registers[vy] - registers[vx];
 }
