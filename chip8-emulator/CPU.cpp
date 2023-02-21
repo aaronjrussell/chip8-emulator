@@ -176,6 +176,11 @@ uint32_t* CPU::getVideoMemory()
 	return videoMemory;
 }
 
+void CPU::setInput(int index, bool value)
+{
+	input[index] = value;
+}
+
 void CPU::OP_00E0()
 {
 	std::fill(memory, memory + memorySize, 0);

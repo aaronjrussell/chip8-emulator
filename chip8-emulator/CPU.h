@@ -16,6 +16,7 @@ public:
 	~CPU();
 	void cycle();
 	uint32_t* getVideoMemory();
+	void setInput(int index, bool value);
 private:
 	constexpr static int memorySize = 4096;
 	const uint16_t romStartAddress = 0x200;
