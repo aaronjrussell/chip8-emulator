@@ -94,6 +94,9 @@ void CPU::decodeOpcode(uint16_t opcode)
 	case 0x5:
 		OP_5xy0(opcode);
 		break;
+	case 0x6:
+		OP_6xkk(opcode);
+		break;
 	}
 }
 
@@ -146,4 +149,11 @@ void CPU::OP_5xy0(uint16_t opcode)
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	uint8_t vy = (opcode & 0x00F0) >> 4;
 	if (registers[vx] == registers[vy]) programCounter += 2;
+}
+
+void CPU::OP_6xkk(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	uint8_t value = opcode & 0x00FF;
+	registers[vx] = value;
 }
