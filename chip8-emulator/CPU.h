@@ -71,4 +71,5 @@ private:
 	void OP_8xy3(uint16_t opcode);
 	void OP_8xy4(uint16_t opcode);
 	void OP_8xy5(uint16_t opcode);
+	void OP_8xy6(uint16_t opcode);
 };
