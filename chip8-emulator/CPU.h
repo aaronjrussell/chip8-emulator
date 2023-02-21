@@ -80,4 +80,5 @@ private:
 	void OP_Cxkk(uint16_t opcode);
 	void OP_Dxyn(uint16_t opcode);
 	void OP_Ex9E(uint16_t opcode);
+	void OP_ExA1(uint16_t opcode);
 };
