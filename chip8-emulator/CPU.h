@@ -82,4 +82,5 @@ private:
 	void OP_Ex9E(uint16_t opcode);
 	void OP_ExA1(uint16_t opcode);
 	void OP_Fx07(uint16_t opcode);
+	void OP_Fx0A(uint16_t opcode);
 };
