@@ -36,7 +36,21 @@ CPU::~CPU()
 }
 
 void CPU::cycle()
-{}
+{
+	uint16_t opcode = (memory[programCounter] << 8) | memory[programCounter + 1];
+	decodeOpcode(opcode);
+	programCounter += 2;
+	if (delayTimer > 0) --delayTimer;
+	if (soundTimer > 0) --soundTimer;
+}
+
+void CPU::decodeOpcode(uint16_t opcode)
+{
+	uint8_t part1 = (opcode & 0xF000) >> 12;
+	uint8_t part2 = (opcode & 0x0F00) >> 8;
+	uint8_t part3 = (opcode & 0x00F0) >> 4;
+	uint8_t part4 = opcode & 0x000F;
+}
 
 uint32_t* CPU::getVideoMemory()
 {
