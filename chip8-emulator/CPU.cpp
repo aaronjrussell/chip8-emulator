@@ -79,6 +79,9 @@ void CPU::decodeOpcode(uint16_t opcode)
 			break;
 		}
 		break;
+	case 0x1:
+		OP_1nnn(opcode);
+		break;
 	}
 }
 
@@ -96,4 +99,10 @@ void CPU::OP_00EE()
 {
 	--stackPointer;
 	programCounter = stack[stackPointer];
+}
+
+void CPU::OP_1nnn(uint16_t opcode)
+{
+	uint16_t address = opcode & 0x0FFF;
+	programCounter = address;
 }
