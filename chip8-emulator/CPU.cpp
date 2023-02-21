@@ -163,6 +163,7 @@ void CPU::decodeOpcode(uint16_t opcode)
 		if (part3 == 0x0 && part4 == 0xA) OP_Fx0A(opcode);
 		if (part3 == 0x1 && part4 == 0x5) OP_Fx15(opcode);
 		if (part3 == 0x1 && part4 == 0xE) OP_Fx1E(opcode);
+		if (part3 == 0x2 && part4 == 0x9) OP_Fx29(opcode);
 		break;
 	}
 }
@@ -408,4 +409,11 @@ void CPU::OP_Fx1E(uint16_t opcode)
 {
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	indexRegister += registers[vx];
+}
+
+void CPU::OP_Fx29(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	uint8_t digit = registers[vx];
+	indexRegister = fontStartAddress + (5 * digit);
 }
