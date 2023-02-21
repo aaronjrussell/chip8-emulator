@@ -1,7 +1,7 @@
 #include "CPU.h"
 
 CPU::CPU(std::string romFilename) :
-	memory{ new uint8_t[4096]{} },
+	memory{ new uint8_t[memorySize]{} },
 	videoMemory{ new uint32_t[64 * 32]{} },
 	randEngine{ std::chrono::system_clock::now().time_since_epoch().count() },
 	randInt{std::uniform_int_distribution<uint16_t>(0, 255)}
@@ -66,9 +66,25 @@ void CPU::decodeOpcode(uint16_t opcode)
 	uint8_t part2 = (opcode & 0x0F00) >> 8;
 	uint8_t part3 = (opcode & 0x00F0) >> 4;
 	uint8_t part4 = opcode & 0x000F;
+	switch (part1)
+	{
+	case 0x0:
+		switch (part4)
+		{
+		case 0x0:
+			OP_00E0();
+			break;
+		}
+		break;
+	}
 }
 
 uint32_t* CPU::getVideoMemory()
 {
 	return videoMemory;
+}
+
+void CPU::OP_00E0()
+{
+	std::fill(memory, memory + memorySize, 0);
 }

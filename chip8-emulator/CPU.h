@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Exceptions.h"
+#include <algorithm>
 #include <chrono>
 #include <cstdint>
 #include <exception>
@@ -16,6 +17,7 @@ public:
 	void cycle();
 	uint32_t* getVideoMemory();
 private:
+	constexpr static int memorySize = 4096;
 	const uint16_t romStartAddress = 0x200;
 	const int maxRomSize = 3584;
 	constexpr static int fontsetSize = 80;
@@ -54,4 +56,5 @@ private:
 	void loadROM(std::string filename);
 	void loadFontset();
 	void decodeOpcode(uint16_t opcode);
+	void OP_00E0();
 };
