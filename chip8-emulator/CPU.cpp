@@ -158,6 +158,9 @@ void CPU::decodeOpcode(uint16_t opcode)
 			break;
 		}
 		break;
+	case 0xF:
+		if (part3 == 0x0 && part4 == 0x7) OP_Fx07(opcode);
+		break;
 	}
 }
 
@@ -362,4 +365,10 @@ void CPU::OP_ExA1(uint16_t opcode)
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	uint8_t key = registers[vx];
 	if (!input[key]) programCounter += 2;
+}
+
+void CPU::OP_Fx07(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	registers[vx] = delayTimer;
 }
