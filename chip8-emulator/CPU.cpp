@@ -4,7 +4,13 @@ CPU::CPU(std::string romFilename) :
 	memory{ new uint8_t[4096]{} },
 	videoMemory{ new uint32_t[64 * 32]{} }
 {
-	std::ifstream romFile = std::ifstream(romFilename, std::ifstream::binary | std::ifstream::ate);
+	loadROM(romFilename);
+	loadFontset();
+}
+
+void CPU::loadROM(std::string filename)
+{
+	std::ifstream romFile = std::ifstream(filename, std::ifstream::binary | std::ifstream::ate);
 	int fileSize = romFile.tellg();
 	if (fileSize > maxRomSize)
 	{
@@ -16,7 +22,7 @@ CPU::CPU(std::string romFilename) :
 	{
 		char* buffer = new char[fileSize];
 		romFile.read(buffer, fileSize);
-		for (int romIndex = 0; romIndex < fileSize; romIndex++)
+		for (int romIndex = 0; romIndex < fileSize; ++romIndex)
 		{
 			memory[romStartAddress + romIndex] = buffer[romIndex];
 		}
@@ -24,9 +30,17 @@ CPU::CPU(std::string romFilename) :
 	}
 	else
 	{
-		throw FileNotFoundException(romFilename);
+		throw FileNotFoundException(filename);
 	}
 	romFile.close();
+}
+
+void CPU::loadFontset()
+{
+	for (int fontIndex = 0; fontIndex < fontsetSize; ++fontIndex)
+	{
+		memory[fontStartAddress + fontIndex] = fontset[fontIndex];
+	}
 }
 
 CPU::~CPU()
