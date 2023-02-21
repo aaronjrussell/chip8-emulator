@@ -62,4 +62,5 @@ private:
 	void OP_2nnn(uint16_t opcode);
 	void OP_3xkk(uint16_t opcode);
 	void OP_4xkk(uint16_t opcode);
+	void OP_5xy0(uint16_t opcode);
 };
