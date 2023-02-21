@@ -61,4 +61,5 @@ private:
 	void OP_1nnn(uint16_t opcode);
 	void OP_2nnn(uint16_t opcode);
 	void OP_3xkk(uint16_t opcode);
+	void OP_4xkk(uint16_t opcode);
 };
