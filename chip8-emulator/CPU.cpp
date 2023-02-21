@@ -161,6 +161,7 @@ void CPU::decodeOpcode(uint16_t opcode)
 	case 0xF:
 		if (part3 == 0x0 && part4 == 0x7) OP_Fx07(opcode);
 		if (part3 == 0x0 && part4 == 0xA) OP_Fx0A(opcode);
+		if (part3 == 0x1 && part4 == 0x5) OP_Fx15(opcode);
 		break;
 	}
 }
@@ -394,4 +395,10 @@ void CPU::OP_Fx0A(uint16_t opcode)
 	else if (input[14]) registers[vx] = 14;
 	else if (input[15]) registers[vx] = 15;
 	else programCounter -= 2;
+}
+
+void CPU::OP_Fx15(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	delayTimer = registers[vx];
 }
