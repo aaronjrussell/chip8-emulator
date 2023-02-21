@@ -85,6 +85,9 @@ void CPU::decodeOpcode(uint16_t opcode)
 	case 0x2:
 		OP_2nnn(opcode);
 		break;
+	case 3:
+		OP_3xkk(opcode);
+		break;
 	}
 }
 
@@ -116,4 +119,11 @@ void CPU::OP_2nnn(uint16_t opcode)
 	++stackPointer;
 	uint16_t address = opcode & 0x0FFF;
 	programCounter = address;
+}
+
+void CPU::OP_3xkk(uint16_t opcode)
+{
+	uint8_t vx = (opcode & 0x0F00) >> 8;
+	uint8_t value = opcode & 0x00FF;
+	if (registers[vx] == value) programCounter += 2;
 }
