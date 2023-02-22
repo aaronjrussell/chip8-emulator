@@ -453,6 +453,7 @@ void CPU::OP_Fx55(uint16_t opcode)
 	{
 		memory[indexRegister + reg] = registers[reg];
 	}
+	indexRegister += 2;
 }
 
 void CPU::OP_Fx65(uint16_t opcode)
@@ -462,4 +463,5 @@ void CPU::OP_Fx65(uint16_t opcode)
 	{
 		registers[reg] = memory[indexRegister + reg];
 	}
+	indexRegister += 2;
 }
