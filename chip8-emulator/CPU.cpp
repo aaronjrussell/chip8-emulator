@@ -54,8 +54,8 @@ CPU::~CPU()
 void CPU::cycle()
 {
 	uint16_t opcode = (memory[programCounter] << 8) | memory[programCounter + 1];
-	decodeOpcode(opcode);
 	programCounter += 2;
+	decodeOpcode(opcode);
 	if (delayTimer > 0) --delayTimer;
 	if (soundTimer > 0) --soundTimer;
 }
@@ -183,7 +183,7 @@ void CPU::setInput(int index, bool value)
 
 void CPU::OP_00E0()
 {
-	std::fill(memory, memory + memorySize, 0);
+	std::fill(videoMemory, videoMemory + 4096, 0);
 }
 
 void CPU::OP_00EE()
