@@ -3,12 +3,20 @@
 #include "SDL.h"
 #include <chrono>
 #include <iostream>
+#include <string>
 
 int main(int argc, char* argv[])
 {
-	const int cycleDelay = 4;
+	if (argc != 3)
+	{
+		std::cerr << "Invalid arguments!\n";
+		std::cerr << "Usage: chip8-emulator.exe <rom_file> <cycle_delay>\n";
+		return 0;
+	}
+	const std::string romFile = argv[1];
+	const int cycleDelay = std::stoi(argv[2]);
 	try {
-		CPU cpu = CPU("");
+		CPU cpu = CPU(romFile);
 		SDL_Init(SDL_INIT_VIDEO);
 		SDL_Window* window = SDL_CreateWindow("CHIP-8 Emulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 320, SDL_WINDOW_SHOWN);
 		SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
