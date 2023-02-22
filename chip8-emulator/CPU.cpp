@@ -355,26 +355,25 @@ void CPU::OP_Dxyn(uint16_t opcode)
 {
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	uint8_t vy = (opcode & 0x00F0) >> 4;
-	uint8_t height = opcode & 0x000F;
-	uint8_t posX = registers[vx] % 64;
-	uint8_t posY = registers[vy] % 32;
+	uint8_t x = registers[vx] % 64;
+	uint8_t y = registers[vy] % 32;
 	registers[0xF] = 0;
-	for (int row = 0; row < height; ++row)
+	uint8_t numRows = opcode & 0x000F;
+	for (int row = 0; row < numRows; ++row)
 	{
-		uint8_t spriteRow = memory[indexRegister + row];
-		for (int column = 0; column < 8; ++column)
+		uint8_t rowData = memory[indexRegister + row];
+		for (int col = 0; col < 8; ++col)
 		{
-			uint8_t spritePixel = spriteRow & (0x80 >> column);
-			uint32_t* screenPixel = &videoMemory[(posY + row) * 64 + (posX + column)];
+			uint8_t spritePixel = rowData & (0x80 >> col);
+			uint32_t* screenPixel = &videoMemory[(y + row) * 64 + (x + col)];
 			if (spritePixel)
 			{
-				if (*screenPixel == 0xFFFFFFFF)
-				{
-					registers[0xF] = 1;
-				}
+				if (*screenPixel == 0xFFFFFFFF) registers[0xF] = 1;
 				*screenPixel ^= 0xFFFFFFFF;
 			}
+			if (x + col >= 64) break;
 		}
+		if (y + row >= 32) break;
 	}
 }
 
