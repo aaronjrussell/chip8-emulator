@@ -79,54 +79,57 @@ int main(int argc, char* argv[])
 					}
 					break;
 				case SDL_KEYUP:
-				case SDLK_1:
-					cpu.setInput(1, false);
-					break;
-				case SDLK_2:
-					cpu.setInput(2, false);
-					break;
-				case SDLK_3:
-					cpu.setInput(3, false);
-					break;
-				case SDLK_4:
-					cpu.setInput(12, false);
-					break;
-				case SDLK_q:
-					cpu.setInput(4, false);
-					break;
-				case SDLK_w:
-					cpu.setInput(5, false);
-					break;
-				case SDLK_e:
-					cpu.setInput(6, false);
-					break;
-				case SDLK_r:
-					cpu.setInput(13, false);
-					break;
-				case SDLK_a:
-					cpu.setInput(7, false);
-					break;
-				case SDLK_s:
-					cpu.setInput(8, false);
-					break;
-				case SDLK_d:
-					cpu.setInput(9, false);
-					break;
-				case SDLK_f:
-					cpu.setInput(14, false);
-					break;
-				case SDLK_z:
-					cpu.setInput(10, false);
-					break;
-				case SDLK_x:
-					cpu.setInput(0, false);
-					break;
-				case SDLK_c:
-					cpu.setInput(11, false);
-					break;
-				case SDLK_v:
-					cpu.setInput(15, false);
-					break;
+					switch (event.key.keysym.sym)
+					{
+					case SDLK_1:
+						cpu.setInput(1, false);
+						break;
+					case SDLK_2:
+						cpu.setInput(2, false);
+						break;
+					case SDLK_3:
+						cpu.setInput(3, false);
+						break;
+					case SDLK_4:
+						cpu.setInput(12, false);
+						break;
+					case SDLK_q:
+						cpu.setInput(4, false);
+						break;
+					case SDLK_w:
+						cpu.setInput(5, false);
+						break;
+					case SDLK_e:
+						cpu.setInput(6, false);
+						break;
+					case SDLK_r:
+						cpu.setInput(13, false);
+						break;
+					case SDLK_a:
+						cpu.setInput(7, false);
+						break;
+					case SDLK_s:
+						cpu.setInput(8, false);
+						break;
+					case SDLK_d:
+						cpu.setInput(9, false);
+						break;
+					case SDLK_f:
+						cpu.setInput(14, false);
+						break;
+					case SDLK_z:
+						cpu.setInput(10, false);
+						break;
+					case SDLK_x:
+						cpu.setInput(0, false);
+						break;
+					case SDLK_c:
+						cpu.setInput(11, false);
+						break;
+					case SDLK_v:
+						cpu.setInput(15, false);
+						break;
+					}
 					break;
 				}
 			}
