@@ -283,9 +283,11 @@ void CPU::OP_8xy5(uint16_t opcode)
 {
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	uint8_t vy = (opcode & 0x00F0) >> 4;
-	if (registers[vx] > registers[vy]) registers[0xF] = 1;
+	bool carryFlag = false;
+	if (registers[vx] > registers[vy]) carryFlag = true;
+	registers[vx] -= registers[vy];
+	if (carryFlag) registers[0xF] = 1;
 	else registers[0xF] = 0;
-	registers[vx] = registers[vx] - registers[vy];
 }
 
 void CPU::OP_8xy6(uint16_t opcode)
