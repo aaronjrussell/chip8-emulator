@@ -253,6 +253,7 @@ void CPU::OP_8xy1(uint16_t opcode)
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	uint8_t vy = (opcode & 0x00F0) >> 4;
 	registers[vx] |= registers[vy];
+	registers[0xF] = 0;
 }
 
 void CPU::OP_8xy2(uint16_t opcode)
@@ -260,6 +261,7 @@ void CPU::OP_8xy2(uint16_t opcode)
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	uint8_t vy = (opcode & 0x00F0) >> 4;
 	registers[vx] &= registers[vy];
+	registers[0xF] = 0;
 }
 
 void CPU::OP_8xy3(uint16_t opcode)
@@ -267,6 +269,7 @@ void CPU::OP_8xy3(uint16_t opcode)
 	uint8_t vx = (opcode & 0x0F00) >> 8;
 	uint8_t vy = (opcode & 0x00F0) >> 4;
 	registers[vx] ^= registers[vy];
+	registers[0xF] = 0;
 }
 
 void CPU::OP_8xy4(uint16_t opcode)
