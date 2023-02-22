@@ -293,8 +293,9 @@ void CPU::OP_8xy5(uint16_t opcode)
 void CPU::OP_8xy6(uint16_t opcode)
 {
 	uint8_t vx = (opcode & 0x0F00) >> 8;
-	registers[0xF] = registers[vx] & 0x0001;
+	uint8_t carryFlag = registers[vx] & 0x0001;
 	registers[vx] >>= 1;
+	registers[0xF] = carryFlag;
 }
 
 void CPU::OP_8xy7(uint16_t opcode)
