@@ -6,6 +6,7 @@ CPU::CPU(std::string romFilename) :
 	randEngine{ std::chrono::system_clock::now().time_since_epoch().count() },
 	randInt{std::uniform_int_distribution<uint16_t>(0, 255)}
 {
+	OP_00E0();
 	loadROM(romFilename);
 	loadFontset();
 }
@@ -183,7 +184,7 @@ void CPU::setInput(int index, bool value)
 
 void CPU::OP_00E0()
 {
-	std::fill(videoMemory, videoMemory + 4096, 0);
+	std::fill(videoMemory, videoMemory + (64 * 32), secondaryColor);
 }
 
 void CPU::OP_00EE()
