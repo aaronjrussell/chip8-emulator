@@ -408,23 +408,90 @@ void CPU::OP_Fx07(uint16_t opcode)
 void CPU::OP_Fx0A(uint16_t opcode)
 {
 	uint8_t vx = (opcode & 0x0F00) >> 8;
-	if (input[0]) registers[vx] = 0;
-	else if (input[1]) registers[vx] = 1;
-	else if (input[2]) registers[vx] = 2;
-	else if (input[3]) registers[vx] = 3;
-	else if (input[4]) registers[vx] = 4;
-	else if (input[5]) registers[vx] = 5;
-	else if (input[6]) registers[vx] = 6;
-	else if (input[7]) registers[vx] = 7;
-	else if (input[8]) registers[vx] = 8;
-	else if (input[9]) registers[vx] = 9;
-	else if (input[10]) registers[vx] = 10;
-	else if (input[11]) registers[vx] = 11;
-	else if (input[12]) registers[vx] = 12;
-	else if (input[13]) registers[vx] = 13;
-	else if (input[14]) registers[vx] = 14;
-	else if (input[15]) registers[vx] = 15;
-	else programCounter -= 2;
+	bool keyPressed = false;
+	int8_t keyValue = -1;
+	if (input[0])
+	{
+		keyPressed = true;
+		keyValue = 0;
+	}
+	else if (input[1])
+	{
+		keyPressed = true;
+		keyValue = 1;
+	}
+	else if (input[2])
+	{
+		keyPressed = true;
+		keyValue = 2;
+	}
+	else if (input[3])
+	{
+		keyPressed = true;
+		keyValue = 3;
+	}
+	else if (input[4])
+	{
+		keyPressed = true;
+		keyValue = 4;
+	}
+	else if (input[5])
+	{
+		keyPressed = true;
+		keyValue = 5;
+	}
+	else if (input[6])
+	{
+		keyPressed = true;
+		keyValue = 6;
+	}
+	else if (input[7])
+	{
+		keyPressed = true;
+		keyValue = 7;
+	}
+	else if (input[8])
+	{
+		keyPressed = true;
+		keyValue = 8;
+	}
+	else if (input[9])
+	{
+		keyPressed = true;
+		keyValue = 9;
+	}
+	else if (input[10])
+	{
+		keyPressed = true;
+		keyValue = 10;
+	}
+	else if (input[11])
+	{
+		keyPressed = true;
+		keyValue = 11;
+	}
+	else if (input[12])
+	{
+		keyPressed = true;
+		keyValue = 12;
+	}
+	else if (input[13])
+	{
+		keyPressed = true;
+		keyValue = 13;
+	}
+	else if (input[14])
+	{
+		keyPressed = true;
+		keyValue = 14;
+	}
+	else if (input[15])
+	{
+		keyPressed = true;
+		keyValue = 15;
+	}
+	if (keyValue == -1) programCounter -= 2;
+	else if (!keyPressed) registers[vx] = keyValue;
 }
 
 void CPU::OP_Fx15(uint16_t opcode)
