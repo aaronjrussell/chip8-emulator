@@ -45,6 +45,8 @@ private:
 	uint8_t registers[16]{};
 	uint8_t* memory;
 	uint32_t* videoMemory;
+	uint32_t primaryColor = 0xFFFFFFFF;
+	uint32_t secondaryColor = 0x00000000;
 	uint16_t indexRegister{ 0 };
 	uint16_t programCounter{ romStartAddress };
 	uint16_t stack[16]{};

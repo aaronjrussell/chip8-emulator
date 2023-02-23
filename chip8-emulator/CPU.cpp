@@ -368,8 +368,16 @@ void CPU::OP_Dxyn(uint16_t opcode)
 			uint32_t* screenPixel = &videoMemory[(y + row) * 64 + (x + col)];
 			if (spritePixel)
 			{
-				if (*screenPixel == 0xFFFFFFFF) registers[0xF] = 1;
-				*screenPixel ^= 0xFFFFFFFF;
+				if (*screenPixel == primaryColor)
+				{
+					*screenPixel = secondaryColor;
+					registers[0xF] = 1;
+				}
+				else
+				{
+					*screenPixel = primaryColor;
+				}
+				//*screenPixel ^= primaryColor;
 			}
 			if (x + col >= 64) break;
 		}
